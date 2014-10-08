@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Install fontconfig dependency for libreoffice
+apt-get -y install fontconfig
+
 # Location for Alfresco nightly downloads, no trailing slash
 export alfresconightly=http://dev.alfresco.com/downloads/nightly/dist
 
