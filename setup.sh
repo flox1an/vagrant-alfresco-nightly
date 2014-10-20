@@ -2,6 +2,7 @@
 
 # Install fontconfig dependency for libreoffice
 apt-get -y install fontconfig
+apt-get -y install curl
 
 # Location for Alfresco nightly downloads, no trailing slash
 export alfresconightly=http://dev.alfresco.com/downloads/nightly/dist
@@ -15,7 +16,7 @@ cd /vagrant
 
 # Download Alfresco release if not already downloaded earlier
 echo Downloading Alfresco release: $releasename
-wget -N $alfresconightly/$releasename
+curl -L -O $alfresconightly/$releasename
 
 # Install Alfresco using the key file
 ./$releasename < /vagrant/install-keys
