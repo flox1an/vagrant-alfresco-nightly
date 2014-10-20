@@ -3,6 +3,8 @@
 # Install fontconfig dependency for libreoffice
 apt-get -y install fontconfig
 apt-get -y install curl
+apt-get -y install libXinerama1
+apt-get -y install libcups*
 
 # Location for Alfresco nightly downloads, no trailing slash
 export alfresconightly=http://dev.alfresco.com/downloads/nightly/dist
