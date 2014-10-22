@@ -23,6 +23,12 @@ Usage
     
         git clone https://github.com/fmaul/vagrant-alfresco-nightly.git
         
+- Optionaly add amp files or libraries to these subfolders. They are copied and applied berfore starting Alfresco.
+        shared-classes/
+        shared-lib/
+        amps-repo/
+        amps-share/
+
 - Start vagrant VM
 
         vagrant up
