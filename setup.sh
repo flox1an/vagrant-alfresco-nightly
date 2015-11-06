@@ -1,24 +1,28 @@
 #!/bin/sh
 
+apt-get -y update
+
 # Install fontconfig dependency for libreoffice
 apt-get -y install fontconfig
 apt-get -y install curl
 apt-get -y install libXinerama1
 apt-get -y install libcups*
-
+apt-get -y install libglu1-mesa
+ 
 # Location for Alfresco nightly downloads, no trailing slash
-export alfresconightly=http://dev.alfresco.com/downloads/nightly/dist
+export alfresconightly=https://alf-community-nightly.s3-eu-west-1.amazonaws.com/Community
 
 # Find distribution filename in the download page, e.g. alfresco-community-5.0.b-SNAPSHOT-installer-linux-x64.bin
 echo Finding latest linux x64 release in $alfresconightly
-releasename=`curl "$alfresconightly/" | grep -Po 'alfresco[^\>]+linux-x64.bin' | head -n1`
-
+releasename=`curl -L "https://alf-community-nightly.s3-eu-west-1.amazonaws.com/?delimiter=/&prefix=Community/" | sed 's/[<>]/\n/g' | grep linux | sed -e 's/Community\///'`
 # Change working dir to vagrant directory
 cd /vagrant
 
 # Download Alfresco release if not already downloaded earlier
-echo Downloading Alfresco release: $releasename
-curl -L -O $alfresconightly/$releasename
+if [ ! -f $releasename ]; then
+	echo Downloading Alfresco release: $releasename
+	curl -L -O $alfresconightly/$releasename
+fi
 
 # Install Alfresco using the key file
 ./$releasename < /vagrant/install-keys

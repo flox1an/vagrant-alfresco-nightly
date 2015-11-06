@@ -5,14 +5,16 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/wily64"
   config.vm.network "forwarded_port", guest: 8080, host: 8080
-  config.vm.network "forwarded_port", guest: 7070, host: 7070
   config.vm.provision "shell", path: "setup.sh"
 	
   config.vm.provider "virtualbox" do |vb|
-     vb.customize ["modifyvm", :id, "--memory", "4048"]
-	 vb.customize ["modifyvm", :id, "--cpus", "4"]   
+     vb.customize ["modifyvm", :id, "--memory", "6144"]
+	 vb.customize ["modifyvm", :id, "--cpus", "8"]  
+     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]            
+     vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
   end	
   
 end
